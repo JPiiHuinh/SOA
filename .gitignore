@@ -1,0 +1,6 @@
+**/target/
+**/.mvn/
+**/.vscode/
+**/.idea/
+**/*.class
+**/*.jar
