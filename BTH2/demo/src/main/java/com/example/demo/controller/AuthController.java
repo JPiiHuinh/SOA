@@ -25,4 +25,18 @@ public class AuthController {
 
         return ResponseEntity.status(401).body("Tài khoản hoặc mật khẩu không chính xác!");
     }
+
+    // Endpoint mới để Bài 3 gọi sang xác thực Token
+    @PostMapping("/validate")
+    public ResponseEntity<Boolean> validateToken(@RequestHeader(value = "Authorization", required = false) String token) {
+        try {
+            if (token != null && token.startsWith("Bearer ")) {
+                token = token.substring(7);
+            }
+            boolean isValid = jwtUtil.validateToken(token);
+            return ResponseEntity.ok(isValid);
+        } catch (Exception e) {
+            return ResponseEntity.ok(false);
+        }
+    }
 }
